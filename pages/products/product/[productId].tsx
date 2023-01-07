@@ -1,6 +1,6 @@
 import React from "react";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { ProductDetails } from "../../components/Product";
+import { ProductDetails } from "../../../components/Product";
 const ProductIdPage = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
