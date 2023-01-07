@@ -32,7 +32,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
 export const ProductListItem = ({ data }: ProductListItemProps) => {
   return (
     <>
-      <Link href={`/products/${data.id}`}>
+      <Link href={`/products/product/${data.id}`}>
         <Image
           src={data.thumbnailUrl}
           alt={data.thumbnailAlt}
