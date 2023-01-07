@@ -10,8 +10,8 @@ export const Navbar = () => {
       <Link href="/users" className="link">
         <li className={router.pathname == "/users" ? "active" : ""}>Users</li>
       </Link>
-      <Link href="/products" className="link">
-        <li className={router.pathname == "/products" ? "active" : ""}>
+      <Link href="/products/page/0" className="link">
+        <li className={router.pathname == "/products/page/0" ? "active" : ""}>
           Products
         </li>
       </Link>

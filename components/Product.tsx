@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
 interface ProductDetails {
   id: number;
   title: string;
   description: string;
+  longDescription: string;
   thumbnailUrl: string;
   thumbnailAlt: string;
   rating: number;
@@ -23,7 +25,9 @@ export const ProductDetails = ({ data }: ProductProps) => {
   return (
     <>
       <img src={data.thumbnailUrl} alt={data.thumbnailAlt} className="h-16" />
-      <div className="">{data.description}</div>
+      <ReactMarkdown className="prose lg:prose-xl">
+        {data.longDescription}
+      </ReactMarkdown>
       <small>{data.rating}</small>
     </>
   );
