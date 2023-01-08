@@ -1,6 +1,7 @@
 import React from "react";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "../../../components/Product";
+import { NextSeo } from "next-seo";
 const ProductIdPage = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -9,6 +10,26 @@ const ProductIdPage = ({
   }
   return (
     <div>
+      <NextSeo
+        title={data.title}
+        description={data.description}
+        canonical={`https://sklep-nextjs-alpha.vercel.app/products/product/${data.id}`}
+        openGraph={{
+          url: `https://sklep-nextjs-alpha.vercel.app/products/product/${data.id}`,
+          title: data.title,
+          description: data.description,
+          images: [
+            {
+              url: data.image,
+              width: 800,
+              height: 600,
+              alt: data.title,
+              type: "image/jpeg",
+            },
+          ],
+          siteName: "Next Sklep",
+        }}
+      />
       <ProductDetails
         data={{
           id: data.id,

@@ -24,7 +24,12 @@ interface ProductListItemProps {
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
     <>
-      <img src={data.thumbnailUrl} alt={data.thumbnailAlt} className="h-16" />
+      <Image
+        width={16}
+        height={9}
+        src={data.thumbnailUrl}
+        alt={data.thumbnailAlt}
+      />
       <ReactMarkdown className="prose lg:prose-xl">
         {data.longDescription}
       </ReactMarkdown>
