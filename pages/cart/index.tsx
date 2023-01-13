@@ -1,6 +1,6 @@
 import React from "react";
 import { useCartState } from "../../components/Cart/CartContext";
-const cart = () => {
+const Cart = () => {
   const cartState = useCartState();
   return (
     <div>
