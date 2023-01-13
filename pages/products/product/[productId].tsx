@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { ProductDetails } from "../../../components/Product";
 import { NextSeo } from "next-seo";
+import { serialize } from "next-mdx-remote/serialize";
 const ProductIdPage = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -39,6 +40,7 @@ const ProductIdPage = ({
           thumbnailUrl: data.image,
           thumbnailAlt: data.title,
           rating: data.rating.rate,
+          price: data.price,
         }}
       />
     </div>
@@ -58,14 +60,23 @@ export const getStaticProps = async ({
     `https://naszsklep-api.vercel.app/api/products/${params?.productId}`
   );
   const data: StoreApiResponse | null = await res.json();
+  if (!data) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
   return {
     props: {
-      data,
+      data: {
+        ...data,
+        longDescription: await serialize(data.longDescription),
+      },
     },
   };
 };
 interface StoreApiResponse {
-  id: number;
+  id: string;
   title: string;
   price: number;
   description: string;
@@ -87,6 +98,6 @@ export const getStaticPaths = async () => {
     paths: data.map((product) => {
       return { params: { productId: product.id.toString() } };
     }),
-    fallback: false,
+    fallback: "blocking",
   };
 };

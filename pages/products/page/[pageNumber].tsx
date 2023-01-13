@@ -18,6 +18,7 @@ const ProductsPage = ({
                   title: product.title,
                   thumbnailUrl: product.image,
                   thumbnailAlt: product.title,
+                  price: product.price,
                 }}
               />
             </li>
@@ -52,7 +53,7 @@ export const getStaticProps = async ({
   };
 };
 interface StoreApiResponse {
-  id: number;
+  id: string;
   title: string;
   price: number;
   description: string;

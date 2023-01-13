@@ -1,19 +1,22 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
+import { Markdown } from "./Markdown";
+import { MarkdownResult } from "../utils";
+import { useCartState } from "./Cart/CartContext";
 interface ProductDetails {
-  id: number;
+  id: string;
   title: string;
   description: string;
-  longDescription: string;
+  longDescription: MarkdownResult;
   thumbnailUrl: string;
   thumbnailAlt: string;
   rating: number;
+  price: number;
 }
 type ProductListItem = Pick<
   ProductDetails,
-  "id" | "title" | "thumbnailUrl" | "thumbnailAlt"
+  "id" | "title" | "thumbnailUrl" | "thumbnailAlt" | "price"
 >;
 interface ProductProps {
   data: ProductDetails;
@@ -23,22 +26,27 @@ interface ProductListItemProps {
 }
 export const ProductDetails = ({ data }: ProductProps) => {
   return (
-    <>
-      <Image
-        width={16}
-        height={9}
-        src={data.thumbnailUrl}
-        alt={data.thumbnailAlt}
-      />
-      <ReactMarkdown className="prose lg:prose-xl">
-        {data.longDescription}
-      </ReactMarkdown>
+    <div className="px-8">
+      <div className="object-cover h-16">
+        {/* <Image
+          fill
+          src={data.thumbnailUrl}
+          alt={data.thumbnailAlt}
+          className="object-contain"
+        /> */}
+      </div>
+
+      <article className="prose lg:prose-xl">
+        <Markdown children={data.longDescription} />
+      </article>
+
       <small>{data.rating}</small>
-    </>
+    </div>
   );
 };
 
 export const ProductListItem = ({ data }: ProductListItemProps) => {
+  const cartState = useCartState();
   return (
     <>
       <Link href={`/products/product/${data.id}`}>
@@ -50,6 +58,17 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
         />
         <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
       </Link>
+      <div
+        onClick={() =>
+          cartState.addItemToCart({
+            title: data.title,
+            price: data.price,
+            id: data.id,
+          })
+        }
+      >
+        Add To Cart
+      </div>
     </>
   );
 };

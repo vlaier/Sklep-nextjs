@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .active {
-  @apply text-red-500;
+  @apply text-yellow-200;
 }
 .link {
-  @apply text-xl text-green-300;
+  @apply text-2xl text-gray-50 hover:text-yellow-400 list-none;
 }
