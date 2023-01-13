@@ -37,7 +37,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
       </div>
 
       <article className="prose lg:prose-xl">
-        <Markdown children={data.longDescription} />
+        <Markdown content={data.longDescription} />
       </article>
 
       <small>{data.rating}</small>

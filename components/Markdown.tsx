@@ -2,10 +2,10 @@ import React, { ReactNode } from "react";
 import { MDXRemote } from "next-mdx-remote";
 import { MarkdownResult } from "../utils";
 import Link from "next/link";
-export const Markdown = ({ children }: { children: MarkdownResult }) => {
+export const Markdown = ({ content }: { content: MarkdownResult }) => {
   return (
     <MDXRemote
-      {...children}
+      {...content}
       components={{
         a: ({ href, ...props }) => {
           if (!href) {
