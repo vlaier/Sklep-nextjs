@@ -2,14 +2,14 @@ import React from "react";
 
 export const SearchBar = () => {
   return (
-    <div className="relative">
+    <div className="relative shadow-lg rounded-full">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="absolute right-5 top-3 w-6 h-6 z-10 text-sky-500"
+        className="absolute right-5 top-3 w-6 h-6 z-10 text-gray-400 peer-active:text-sky-500 peer-focus:text-sky-500"
       >
         <path
           strokeLinecap="round"
@@ -20,7 +20,7 @@ export const SearchBar = () => {
       <input
         type="text"
         placeholder="Szukaj..."
-        className="py-2 rounded-full pl-8 text-2xl  outline-sky-400 relative"
+        className="peer py-2 rounded-full pl-8 pr-12 text-2xl  outline-sky-400 relative"
       />
     </div>
   );

@@ -1,18 +1,16 @@
 import React from "react";
 import { useCartState } from "../../components/Cart/CartContext";
+import { CartItemElement } from "../../components/Cart/CartItem";
 const Cart = () => {
   const cartState = useCartState();
   return (
-    <div>
-      <ul>
+    <div className="border-2 border-red-500 grid grid-cols-2">
+      <ul className="border-2 border-green-500 w-fit">
         {cartState.items.map((item, index) => {
-          return (
-            <li key={item.id}>
-              {item.title} - {item.price}
-            </li>
-          );
+          return <CartItemElement itemData={item} key={item.id} />;
         })}
       </ul>
+      <div>Podsumowanie koszyka</div>
     </div>
   );
 };

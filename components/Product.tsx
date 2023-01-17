@@ -48,27 +48,34 @@ export const ProductDetails = ({ data }: ProductProps) => {
 export const ProductListItem = ({ data }: ProductListItemProps) => {
   const cartState = useCartState();
   return (
-    <>
-      <Link href={`/products/product/${data.id}`}>
-        <Image
-          src={data.thumbnailUrl}
-          alt={data.thumbnailAlt}
-          width={16}
-          height={9}
-        />
-        <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
+    <div className="flex flex-col items-center border-b hover:shadow-lg hover:rounded-2xl py-4 h-full justify-between gap-16  w-80 px-8">
+      <Link
+        href={`/products/product/${data.id}`}
+        className="flex items-center flex-col"
+      >
+        <div className="w-full h-32 relative ">
+          <Image
+            src={data.thumbnailUrl}
+            alt={data.thumbnailAlt}
+            className="object-contain"
+            fill
+          />
+        </div>
+        <h2 className="text-3xl font-bold">{data.title}</h2>
       </Link>
-      <div
+      <button
+        className="text-gray-50 bg-sky-500 p-5 rounded-lg w-fit hover:bg-sky-400 font-bold duration-300"
         onClick={() =>
           cartState.addItemToCart({
             title: data.title,
             price: data.price,
             id: data.id,
+            count: 1,
           })
         }
       >
         Add To Cart
-      </div>
-    </>
+      </button>
+    </div>
   );
 };
