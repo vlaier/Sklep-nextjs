@@ -1,8 +1,9 @@
 import React, { useState, useContext, ReactNode } from "react";
-interface CartItem {
+export interface CartItem {
   id: string;
   title: string;
   price: number;
+  count: number;
 }
 interface CartState {
   items: CartItem[];
@@ -21,7 +22,21 @@ export const CartStateContextProvider = ({
       value={{
         items: cartItems,
         addItemToCart: (item) =>
-          setCartItems((cartItems) => [...cartItems, item]),
+          setCartItems((prevCartItems) => {
+            const existingItem = prevCartItems.find(
+              (existingItem) => existingItem.id === item.id
+            );
+            if (!existingItem) {
+              return [...prevCartItems, item];
+            }
+            const newCartItems = prevCartItems.map((cartItem) => {
+              if (cartItem.id === existingItem.id) {
+                return { ...cartItem, count: cartItem.count + 1 };
+              }
+              return cartItem;
+            });
+            return newCartItems;
+          }),
       }}
     >
       {children}
